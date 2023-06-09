@@ -1,55 +1,47 @@
 const countElement = document.getElementById('count');
 const message = document.getElementById('message');
-const numbers = document.getElementById('numbers');
+const numbersElement = document.getElementById('numbers');
 
 // **************FUNZIONE
 function getRandomNumber (){
-        const number = Math.floor(Math.random() * 100) + 1;
+        const number = parseInt(Math.floor(Math.random() * 100) + 1);
         return number;
 }
 // **************
 
-const numberlist = [];
+// lista numeri casuali
+let numbers = [];
 
-let randomNumber = getRandomNumber();
-
-for (let i = 0; i < numberlist.length; i++){
-    numberlist.push(randomNumber);
-    console.log(numberlist);
+for (let i = 0; i < 5; i++) {
+  let number = getRandomNumber();
+  numbers.push(number);
 }
 
+// dichiaro i secondi del countdown;
+let count = 30;
 
-let count = 31;
+// stampo in pagina
+numbersElement.innerText = numbers;
+message.innerText = 'Memorizza i numeri entro il tempo limite:'
 
+// LOGICA
 const interval = setInterval(() => {
-
     if (count === 0){
-    
-    }else{
 
+            clearInterval(interval);
+            numbersElement.classList.add('d-none');
+            message.classList.add('d-none');
+            setTimeout(() => {
+                for (let i = 0; i < 5; i++) {
+                    let number = parseInt(prompt("Inserisci un numero:"));
+                    if (number === numbers[i]){
+                        
+                    }else{
+                        alert('Numero sbagliato:' + ' ' + 'Hai perso!');
+                    }
+                  }
+            },1000)
+    }else {
         countElement.innerText = --count;
-        message.innerText = 'Memorizza i numeri entro il tempo limite:'
-
     }
-
-
 }, 1000)
-
-
-
-
-
-// const lista = ['pane' , 'latte' , 'carne' , 'pesce' , 'acqua'];
-
-// let spesa = ''
-
-// // for (let i = 0; i < lista.length; i++){
-// //     spesa += lista[i];
-// // }
-
-// let i = 0;
-// while(i < lista.length){
-//     spesa += lista[i];
-//     i++
-// }
-// document.getElementById('spesa').innerHTML = spesa;
